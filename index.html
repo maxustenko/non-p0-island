@@ -148,6 +148,52 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--sea)}
 .note{background:#fff;border-radius:14px;padding:12px 14px;font-size:14px;border-left:6px solid var(--tools);margin-top:14px;text-align:left}
 .locked{background:#e6f6ee;border-radius:16px;padding:16px;text-align:center;font-weight:700}
 @media(max-width:820px){.homecards{grid-template-columns:1fr}}
+.cbox{background:#fff;border:3px solid var(--sun);border-radius:20px;padding:18px;margin-top:14px;box-shadow:0 4px 0 rgba(201,127,0,.25)}
+.ctitle{font-size:24px;margin-bottom:10px}
+.crow{display:flex;gap:12px;align-items:center}
+.cprev{font-size:54px;width:90px;height:90px;display:grid;place-items:center;background:#fff6df;border-radius:20px;flex:none;transition:transform .15s}
+.cprev.bump{transform:scale(1.15)}
+input.cinput{font-size:21px;padding:18px 18px;border-width:3px}
+.clbl{font-weight:800;margin:16px 0 8px}
+.esug,.egrid{display:flex;flex-wrap:wrap;gap:8px}
+.ebtn{font-size:30px;width:58px;height:58px;border-radius:14px;background:#f2f8f9;border:3px solid transparent;font-family:inherit;line-height:1;padding:0}
+.ebtn:hover{background:#fff6df}
+.ebtn.on{border-color:var(--sun);background:#fff6df}
+.emore summary{cursor:pointer;font-weight:700;color:var(--sea-deep);margin-top:10px}
+.egrid{margin-top:10px;max-height:230px;overflow:auto;padding:2px}
+.ccats{display:flex;flex-wrap:wrap;gap:8px}
+.ccat{padding:10px 16px;border-radius:99px;background:#f2f8f9;font-weight:600;border:3px solid transparent;font-size:16px;color:var(--ink)}
+.ccat.on{background:#fff;border-color:var(--ccol)}
+.cfoot{display:flex;justify-content:flex-end;margin-top:14px}
+.item.other{grid-column:span 2;border:3px dashed var(--sun);background:#fffaf0;display:flex;align-items:center;justify-content:center;gap:12px}
+.item.other .em{font-size:40px}.item.other .nm{font-size:17px;font-family:Fredoka;font-weight:600}
+.slot textarea{margin-top:6px;font:inherit;font-size:14px;padding:8px 10px;border-radius:10px;border:2px solid #d6e6e8;width:100%;resize:vertical;min-height:52px}
+.slot textarea:focus{outline:none;border-color:var(--sea)}
+.facts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:left;margin:16px 0}
+.fact{background:#fff;border-radius:14px;padding:12px;display:flex;gap:10px;align-items:flex-start;box-shadow:0 2px 0 rgba(0,0,0,.05)}
+.fact .fe{font-size:28px;line-height:1}
+.fact .fl{font-weight:800;font-size:12px;text-transform:uppercase;color:var(--muted);letter-spacing:.5px}
+.rules{background:var(--sea-deep);color:#fff;border-radius:14px;padding:14px 18px;text-align:left;margin:10px 0 16px;font-size:15px}
+.rules ul{margin:6px 0 0;padding-left:20px}.rules li{margin:3px 0}
+.brief{border-radius:20px;overflow:hidden;margin-bottom:12px;padding-top:8px}
+.sctag{display:inline-block;background:#fff;border-radius:99px;padding:5px 14px;font-family:Fredoka;font-weight:600;color:var(--sea-deep)}
+.scgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin:10px 0 16px}
+.sc{background:#fff;border:3px solid #d6e6e8;border-radius:16px;padding:12px;cursor:pointer;text-align:left;transition:.12s}
+.sc:hover{transform:translateY(-2px)}
+.sc.on{border-color:var(--sea);background:#eefafb}
+.sc .se{font-size:34px}
+.twl{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;margin-top:8px}
+.tw{background:#fff;border-radius:14px;padding:10px 12px;cursor:pointer;text-align:left;border:2px solid #d6e6e8;font-family:Nunito;font-size:14px;color:var(--ink);display:flex;gap:10px;align-items:center}
+.tw:hover{border-color:var(--sun);background:#fffaf0}
+.tw .te{font-size:24px}
+.tw.rnd{border-style:dashed;border-color:var(--sun)}
+.sndb{background:rgba(255,255,255,.75);border-radius:99px;width:40px;height:40px;font-size:18px;padding:0}
+.sndb.off{opacity:.45}
+.howto{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:6px 0 18px;text-align:left}
+.howto div{background:#fff;border-radius:14px;padding:12px;font-size:14px}
+.howto b{display:block;font-family:Fredoka;font-size:16px;margin-bottom:2px}
+@media(max-width:820px){.facts-grid{grid-template-columns:1fr 1fr}.howto{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.facts-grid{grid-template-columns:1fr}.item.other{grid-column:span 1;flex-direction:column;gap:2px}.ebtn{width:50px;height:50px;font-size:26px}}
 </style>
 </head>
 <body>
@@ -156,7 +202,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--sea)}
 <div class="wrap">
   <header class="top">
     <div class="logo" style="cursor:pointer" id="logo">🏝️ Non-P0 <span class="o">island</span></div>
-    <div class="row" style="gap:8px"><span class="pill" id="netst" style="display:none"></span><div class="stepper" id="stepper"></div></div>
+    <div class="row" style="gap:8px"><span class="pill" id="netst" style="display:none"></span><button class="sndb" id="sfxb" title="Sound effects on/off" aria-label="Sound effects">🔊</button><button class="sndb" id="ambb" title="Ocean waves on/off" aria-label="Ocean waves">🌊</button><div class="stepper" id="stepper"></div></div>
   </header>
   <main id="app"></main>
 </div>
@@ -186,12 +232,92 @@ const ITEMS=[
 const HINTS=["What would you miss most after one month?","Think about day 1 — and then about day 300.","Try one item for your body, one for your mind, one for your heart.","Are you a fixer, a planner, or a beach lounger?","What could you NOT make yourself from coconuts and sticks?","Which item would make the best story when you're rescued?","What keeps you sane when it rains for a week straight?"];
 const QUESTIONS=["Why that over a knife?","Which of your three would you drop first?","What would you trade for someone else's item?","How does that help you on day 200?","Would your best friend have guessed these picks?","Which item is secretly the most useful?","What's the first thing you'd do on day one?","Which pick is pure heart, no logic?","If a storm took one item, which hurts the most?","Who here would you most like as an island neighbor, based on their picks?"];
 const TWISTS=[
-  {e:"🌊",t:"Surprise! The spring dried up — there's no fresh water.",q:"Who's in trouble now? Who adapts best?"},
-  {e:"🦜",t:"Twist! You're not alone — there's one other castaway on the island.",q:"Whose items would you want to team up with?"},
+  {e:"🌊",t:"Your water source dries up!",q:"Who's in trouble now? Who adapts best?"},
+  {e:"🦜",t:"You're not alone — there's one other castaway on the island.",q:"Whose items would you want to team up with?"},
   {e:"⛈️",t:"A storm hits! Everyone loses ONE of their three items.",q:"Which one does each person give up?"},
   {e:"🔄",t:"Trade market is open! Everyone may swap one item with another player.",q:"Who's making a deal?"},
-  {e:"🚁",t:"A helicopter will come in 6 months instead of 12.",q:"Would anyone change their picks?"}
+  {e:"🚁",t:"Rescue comes in half the time.",q:"Would anyone change their picks?"},
+  {e:"📦",t:"A crate washes ashore — everyone gets a 4th item!",q:"What do you add, and why?"},
+  {e:"🏝️",t:"You all landed on the SAME island.",q:"As a team, which 5 items from everyone's picks do you keep?"},
+  {e:"⏳",t:"Rescue is delayed — you're staying twice as long.",q:"Which of your items lasts the distance?"}
 ];
+const NOT_THERE=["🚫","Not there","No other people, no buildings, no phone signal or internet"];
+const SCENARIOS=[
+  {id:"tropical",name:"Tropical Island",em:"🌴",dur:"1 year",tag:"The classic",sky:["#8fd3e8","#e9f7f4"],sand:"#f6dfa4",sandD:"#e7c47a",leaf:"#2a9d6f",
+   story:"Your plane went down over the Pacific. You swam to a small tropical island.",
+   facts:[["💧","Water","A small freshwater spring in the middle of the island"],["🥥","Food","Coconuts, crabs and fish in the lagoon"],["🌡️","Weather","Hot 30°C days, warm nights, a tropical storm every few weeks"],["📏","Size","About 1 km across — you can walk around it in 30 minutes"],["🐢","Wildlife","Crabs, seabirds and the odd curious turtle"]]},
+  {id:"arctic",name:"Frozen Island",em:"🧊",dur:"6 months",tag:"Bring a scarf",sky:["#cfe3f3","#f4f8fb"],sand:"#f4f8fb",sandD:"#cfdbe6",leaf:"#3c6e5a",
+   story:"Your research ship got stuck in the ice. You made it to a small island in the Arctic.",
+   facts:[["💧","Water","Snow and ice everywhere — melt it to drink"],["🐟","Food","Fish under the ice, seabird eggs in summer"],["🥶","Weather","Freezing, −20°C nights and only 4 hours of daylight"],["📏","Size","3 km of rock and snow with a few stunted pine trees"],["🐻‍❄️","Wildlife","Seals, arctic foxes — and a polar bear that visits"]]},
+  {id:"jungle",name:"Jungle Island",em:"🦜",dur:"1 year",tag:"Lush and wild",sky:["#9fd8c4","#eaf7ef"],sand:"#d9c58e",sandD:"#bfa86b",leaf:"#1f7a3f",
+   story:"Your small plane crash-landed on a big island covered in thick rainforest.",
+   facts:[["💧","Water","A river with a waterfall (best boiled first)"],["🍌","Food","Bananas, mangoes, wild yams — if you can find them"],["🌧️","Weather","Warm and humid, heavy rain almost every afternoon"],["📏","Size","10 km of dense jungle, with an old abandoned hut"],["🐒","Wildlife","Monkeys, parrots, snakes and LOTS of mosquitoes"]]},
+  {id:"volcano",name:"Volcanic Island",em:"🌋",dur:"3 months",tag:"Things might get hot",sky:["#f3c6a5","#fbeee3"],sand:"#6b625e",sandD:"#4a4441",leaf:"#4f8a3a",
+   story:"Your boat sank near a young volcanic island. It's rumbling, but it's dry land.",
+   facts:[["💧","Water","Rainwater pools and a warm (drinkable) spring"],["🥚","Food","Seabird eggs, fish, a few berry bushes"],["🌫️","Weather","Warm; ash clouds sometimes block out the sun"],["📏","Size","2 km of black sand and rock around a smoking volcano"],["🦎","Wildlife","Seabirds, lizards and crabs"]]},
+  {id:"sandbar",name:"Tiny Sandbar",em:"🏝️",dur:"1 month",tag:"Hard mode",sky:["#7fd0e6","#e9f7f4"],sand:"#f6dfa4",sandD:"#e7c47a",leaf:"#2a9d6f",
+   story:"Your sailing trip went wrong. You're on a sandbar in the middle of the ocean.",
+   facts:[["💧","Water","No spring — only rainwater, when it rains"],["🐟","Food","Fish, if you can catch them"],["☀️","Weather","Blazing sun all day, nowhere to hide"],["📏","Size","50 m across with one lonely palm tree"],["🦈","Wildlife","Fish, seagulls — and sharks circling"]]}
+];
+const scOf=id=>SCENARIOS.find(x=>x.id===id)||SCENARIOS[0];
+const resolveSc=id=>id==="random"?pick(SCENARIOS).id:(SCENARIOS.some(x=>x.id===id)?id:"tropical");
+const EMOJI_KEYS=[["coffee","☕"],["espresso","☕"],["tea","🍵"],["beer","🍺"],["wine","🍷"],["whisk","🥃"],["vodka","🥃"],["rum","🥃"],["cocktail","🍹"],["chocolate","🍫"],["pizza","🍕"],["burger","🍔"],["food","🍱"],["snack","🍿"],["popcorn","🍿"],["candy","🍬"],["sweet","🍬"],["cake","🎂"],["cookie","🍪"],["biscuit","🍪"],["donut","🍩"],["ice cream","🍦"],["bread","🍞"],["cheese","🧀"],["egg","🥚"],["milk","🥛"],["juice","🧃"],["soda","🥤"],["cola","🥤"],["water","💧"],["rice","🍚"],["pasta","🍝"],["noodle","🍜"],["ramen","🍜"],["sushi","🍣"],["taco","🌮"],["fruit","🍎"],["apple","🍎"],["banana","🍌"],["honey","🍯"],["peanut","🥜"],["nut","🥜"],["salt","🧂"],["spice","🌶️"],["sauce","🌶️"],["chili","🌶️"],["kettle","🫖"],["phone","📱"],["ipad","📱"],["tablet","📱"],["kindle","📱"],["laptop","💻"],["computer","💻"],["book","📖"],["novel","📖"],["bible","📖"],["music","🎵"],["song","🎵"],["headphone","🎧"],["earbud","🎧"],["airpod","🎧"],["speaker","🔊"],["radio","📻"],["camera","📷"],["tv","📺"],["netflix","📺"],["movie","🎬"],["film","🎬"],["game","🎮"],["console","🎮"],["switch","🎮"],["playstation","🎮"],["ball","⚽"],["football","⚽"],["soccer","⚽"],["basketball","🏀"],["tennis","🎾"],["volleyball","🏐"],["surf","🏄"],["board","🏄"],["skate","🛹"],["bike","🚲"],["dog","🐶"],["puppy","🐶"],["cat","🐱"],["kitten","🐱"],["pet","🐾"],["horse","🐴"],["chicken","🐔"],["goat","🐐"],["cow","🐄"],["parrot","🦜"],["fish","🐟"],["plant","🪴"],["tree","🌳"],["flower","🌸"],["seed","🌱"],["garden","🌱"],["sunglasses","🕶️"],["sunscreen","🧴"],["suncream","🧴"],["lotion","🧴"],["shampoo","🧴"],["soap","🧼"],["toothbrush","🪥"],["toothpaste","🪥"],["toilet","🧻"],["tissue","🧻"],["razor","🪒"],["mirror","🪞"],["hat","👒"],["cap","🧢"],["shoe","👟"],["trainer","👟"],["sneaker","👟"],["boot","🥾"],["sock","🧦"],["clothes","👕"],["shirt","👕"],["jumper","🧥"],["sweater","🧥"],["hoodie","🧥"],["jacket","🧥"],["coat","🧥"],["blanket","🛌"],["sleeping bag","🛌"],["pillow","🛏️"],["bed","🛏️"],["mattress","🛏️"],["tent","⛺"],["shelter","⛺"],["umbrella","☂️"],["torch","🔦"],["flashlight","🔦"],["lamp","🪔"],["candle","🕯️"],["lighter","🔥"],["fire","🔥"],["match","🔥"],["flint","🔥"],["knife","🔪"],["machete","🔪"],["sword","⚔️"],["bow","🏹"],["arrow","🏹"],["spear","🔱"],["hammer","🔨"],["saw","🪚"],["shovel","🪏"],["spade","🪏"],["tool","🧰"],["multitool","🧰"],["swiss","🧰"],["wrench","🔧"],["screwdriver","🪛"],["duct","🩹"],["tape","🩹"],["rope","🪢"],["string","🪢"],["net","🥅"],["hook","🪝"],["pot","🍲"],["pan","🍳"],["bottle","🍶"],["map","🗺️"],["compass","🧭"],["binocular","🔭"],["telescope","🔭"],["medicine","💊"],["medic","💊"],["pill","💊"],["vitamin","💊"],["first aid","🩹"],["bandage","🩹"],["plaster","🩹"],["solar","☀️"],["battery","🔋"],["charger","🔌"],["power","🔋"],["generator","⚡"],["photo","🖼️"],["picture","🖼️"],["letter","💌"],["ring","💍"],["teddy","🧸"],["toy","🧸"],["journal","📓"],["notebook","📓"],["diary","📓"],["pen","🖊️"],["pencil","✏️"],["paint","🎨"],["art","🎨"],["sketch","🎨"],["guitar","🎸"],["ukulele","🎸"],["piano","🎹"],["keyboard","🎹"],["drum","🥁"],["violin","🎻"],["harmonica","🎶"],["flute","🎶"],["card","🃏"],["chess","♟️"],["puzzle","🧩"],["rubik","🧩"],["dice","🎲"],["board game","🎲"],["lego","🧱"],["mom","👩"],["mum","👩"],["mother","👩"],["dad","👨"],["father","👨"],["friend","🧑‍🤝‍🧑"],["partner","💑"],["wife","💑"],["husband","💑"],["girlfriend","💑"],["boyfriend","💑"],["baby","👶"],["kid","🧒"],["child","🧒"],["money","💰"],["cash","💵"],["gold","🪙"],["hammock","🏖️"],["chair","🪑"],["glasses","👓"],["contact lens","👓"],["watch","⌚"],["clock","⏰"],["alarm","⏰"],["yoga","🧘"],["mat","🧘"],["gym","🏋️"],["weight","🏋️"],["dumbbell","🏋️"],["fridge","🧊"],["ice","🧊"],["fan","🌀"],["mosquito","🦟"],["bug spray","🦟"],["repellent","🦟"],["scissor","✂️"],["needle","🪡"],["sewing","🪡"],["swim","🏊"],["goggle","🥽"],["snorkel","🤿"],["diving","🤿"],["flipper","🤿"],["bucket","🪣"],["broom","🧹"],["magnif","🔍"],["whistle","📣"],["flare","🧨"],["firework","🎆"],["wifi","📶"],["internet","📶"],["podcast","🎙️"],["microphone","🎤"],["karaoke","🎤"],["perfume","🌸"],["makeup","💄"],["lipstick","💄"],["hairbrush","🪮"],["comb","🪮"],["robot","🤖"],["claude","🤖"],["drone","🛸"],["telescope","🔭"],["tarp","⛺"],["axe","🪓"],["fishing","🎣"],["rod","🎣"],["cooler","🧊"],["sauna","🧖"],["bath","🛁"],["shower","🚿"],["pillow","🛏️"],["plushie","🧸"],["photo album","📸"],["scrapbook","📸"],["sunhat","👒"],["crown","👑"],["trophy","🏆"],["magic","🪄"],["wand","🪄"],["crystal","🔮"],["candle","🕯️"],["incense","🪔"],["coffee machine","☕"],["matcha","🍵"],["avocado","🥑"],["potato","🥔"],["chips","🍟"],["fries","🍟"],["crisps","🍟"],["steak","🥩"],["meat","🥩"],["bacon","🥓"]];
+const CAT_KEYS={
+  survival:["water","knife","machete","fire","match","lighter","flint","medic","pill","vitamin","first aid","bandage","plaster","tent","shelter","tarp","blanket","sleeping bag","sunscreen","suncream","food","rice","salt","boot","jacket","coat","repellent","bug spray","flare","whistle","purifier","filter","bow","spear"],
+  tools:["rope","string","hammer","saw","shovel","spade","tool","multitool","swiss","wrench","screwdriver","duct","tape","net","hook","pot","pan","kettle","map","compass","binocular","telescope","torch","flashlight","solar","battery","charger","generator","axe","fishing","rod","needle","sewing","scissor","bucket","bottle","goggle","snorkel","drone","radio","magnif"],
+  personal:["photo","picture","letter","ring","teddy","plushie","journal","notebook","diary","mom","mum","mother","dad","father","friend","partner","wife","husband","girlfriend","boyfriend","baby","kid","child","dog","puppy","cat","kitten","pet","bible","scrapbook","photo album","seed","garden"]
+};
+const EMOJI_PALETTE="✨ ☕ 🍫 🍕 🍺 🍷 🧃 🍯 🌶️ 🥑 🍌 🎧 📻 📷 🎮 📖 📓 🖊️ 🎨 🎸 🎹 🥁 🃏 🧩 🎲 ⚽ 🏐 🏄 🤿 🎣 🧘 🏋️ 🐶 🐱 🐾 🦜 🪴 🌱 🌸 🕶️ 🧴 🧼 🪥 🧻 👒 🧢 👟 🥾 🧦 🧥 🛌 🛏️ ⛺ ☂️ 🔦 🕯️ 🔥 🔪 🪓 🔨 🪚 🧰 🔧 🪢 🍲 🍳 🍶 💧 🗺️ 🧭 🔭 💊 🩹 🔋 ☀️ 🖼️ 💌 💍 🧸 💰 🪑 ⌚ 🧊 🪄 🔮 👑 🏆 🤖 🛸 🎤 💛 ⚙️ 🧰".split(" ");
+const DEFAULT_SUG=["✨","☕","🎧","🧸","🍫","🎨","🔦","💛"];
+const reEsc=k=>k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+function suggestEmojis(t){t=(t||"").toLowerCase();if(!t.trim())return[];const hits=[];
+  EMOJI_KEYS.forEach(([k,e],i)=>{const m=t.search(new RegExp("\\b"+reEsc(k)));if(m>=0)hits.push([k.length*10-m*0.01-i*0.0001,e])});
+  hits.sort((a,b)=>b[0]-a[0]);return [...new Set(hits.map(h=>h[1]))].slice(0,8)}
+function guessCat(t){t=(t||"").toLowerCase();for(const [c,ks] of Object.entries(CAT_KEYS))if(ks.some(k=>new RegExp("\\b"+reEsc(k)).test(t)))return c;return "comfort"}
+
+/* ---------- sound (Web Audio, no files) ---------- */
+const SND={fx:store0("np0-sfx")!=="off",amb:store0("np0-amb")!=="off",ctx:null,node:null};
+function store0(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function actx(){if(!SND.ctx){try{const A=window.AudioContext||window.webkitAudioContext;if(A)SND.ctx=new A()}catch(e){}}
+  if(SND.ctx&&SND.ctx.state==="suspended"){try{SND.ctx.resume()}catch(e){}}return SND.ctx}
+function tone(f,d,type,v,when,to){const c=SND.ctx,t=c.currentTime+(when||0);const o=c.createOscillator(),g=c.createGain();o.type=type||"sine";o.frequency.setValueAtTime(f,t);
+  if(to)o.frequency.exponentialRampToValueAtTime(to,t+d);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(v||.1,t+.012);g.gain.exponentialRampToValueAtTime(0.0001,t+d);
+  o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+d+.05)}
+function noise(d,v,freq,when,q){const c=SND.ctx,n=Math.floor(c.sampleRate*d);const b=c.createBuffer(1,n,c.sampleRate);const a=b.getChannelData(0);
+  for(let i=0;i<n;i++){const env=i<n*.15?i/(n*.15):1-(i-n*.15)/(n*.85);a[i]=(Math.random()*2-1)*env}
+  const src=c.createBufferSource();src.buffer=b;const f=c.createBiquadFilter();f.type="bandpass";f.frequency.value=freq;f.Q.value=q||.8;const g=c.createGain();g.gain.value=v;
+  src.connect(f);f.connect(g);g.connect(c.destination);src.start(c.currentTime+(when||0))}
+const SFX={
+  click:()=>tone(700,.05,"triangle",.05),
+  pick:()=>{tone(523,.09,"triangle",.11);tone(784,.12,"triangle",.11,.07)},
+  unpick:()=>{tone(523,.08,"triangle",.08);tone(392,.1,"triangle",.08,.06)},
+  emoji:()=>tone(988,.07,"sine",.08),
+  splash:()=>{noise(.7,.5,700,0,.6);tone(300,.25,"sine",.06,0,120)},
+  whoosh:()=>{noise(1.6,.35,500,0,.5);noise(1.2,.2,1200,.4,.6)},
+  tick:()=>tone(1200,.04,"square",.035),
+  gong:()=>{tone(196,1.8,"sine",.22);tone(294,1.5,"sine",.1);tone(392,1.2,"sine",.05)},
+  lock:()=>{tone(660,.07,"square",.05);tone(990,.12,"square",.05,.07)},
+  join:()=>[523,659,784].forEach((f,i)=>tone(f,.14,"triangle",.09,i*.08)),
+  turn:()=>[784,988].forEach((f,i)=>tone(f,.16,"triangle",.1,i*.1)),
+  fanfare:()=>{[523,659,784,1047].forEach((f,i)=>tone(f,.28,"triangle",.11,i*.13));tone(1047,.7,"triangle",.09,.55)},
+  twist:()=>{tone(180,.6,"sawtooth",.08,0,70);noise(.9,.25,350,0,.7);tone(880,.12,"square",.05,.55);tone(660,.2,"square",.05,.68)}
+};
+function play(n,delay){if(!SND.fx)return;const go=()=>{const c=actx();if(!c)return;try{SFX[n]()}catch(e){}};delay?setTimeout(go,delay):go()}
+function startAmb(){if(!SND.amb||SND.node)return;const c=actx();if(!c)return;try{
+  const len=4*c.sampleRate,b=c.createBuffer(1,len,c.sampleRate),d=b.getChannelData(0);let last=0;
+  for(let i=0;i<len;i++){const w=Math.random()*2-1;last=(last+0.02*w)/1.02;d[i]=last*3.5}
+  const src=c.createBufferSource();src.buffer=b;src.loop=true;const f=c.createBiquadFilter();f.type="lowpass";f.frequency.value=600;
+  const g=c.createGain();g.gain.value=.05;const lfo=c.createOscillator();lfo.frequency.value=.11;const lg=c.createGain();lg.gain.value=.04;
+  lfo.connect(lg);lg.connect(g.gain);src.connect(f);f.connect(g);g.connect(c.destination);src.start();lfo.start();SND.node={src,lfo}}catch(e){}}
+function stopAmb(){if(SND.node){try{SND.node.src.stop();SND.node.lfo.stop()}catch(e){}SND.node=null}}
+function sndButtons(){const a=document.getElementById("sfxb"),b=document.getElementById("ambb");if(!a)return;
+  a.textContent=SND.fx?"🔊":"🔇";a.classList.toggle("off",!SND.fx);b.classList.toggle("off",!SND.amb);
+  a.title=SND.fx?"Sound effects: on":"Sound effects: off";b.title=SND.amb?"Ocean waves: on":"Ocean waves: off"}
+document.getElementById("sfxb").onclick=e=>{e.stopPropagation();SND.fx=!SND.fx;try{localStorage.setItem("np0-sfx",SND.fx?"on":"off")}catch(x){}sndButtons();play("click")};
+document.getElementById("ambb").onclick=e=>{e.stopPropagation();SND.amb=!SND.amb;try{localStorage.setItem("np0-amb",SND.amb?"on":"off")}catch(x){}if(SND.amb)startAmb();else stopAmb();sndButtons()};
+document.addEventListener("pointerdown",()=>{actx();startAmb()},true);
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("button.btn,.mode,.sc,.ccat");if(t&&!t.disabled)play("click")},true);
+sndButtons();
 
 const $=s=>document.querySelector(s);
 const app=$("#app");
@@ -225,6 +351,51 @@ const ISLAND=`<svg class="island" viewBox="0 0 720 300" role="img" aria-label="A
 <path d="M30 272 q30 -10 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0" stroke="#fff" stroke-width="3" fill="none" opacity=".7">
 <animateTransform attributeName="transform" type="translate" values="0 0;-30 0;0 0" dur="3s" repeatCount="indefinite"/></path>
 </svg>`;
+function islandSVG(sc){
+  sc=sc||SCENARIOS[0];
+  let s=ISLAND.split("#f6dfa4").join(sc.sand).split("#e7c47a").join(sc.sandD).split("#2a9d6f").join(sc.leaf);
+  const deco={
+    tropical:`<text x="262" y="236" font-size="26">🦀</text><text x="196" y="230" font-size="22">🐚</text>`,
+    arctic:`<text x="250" y="236" font-size="28">🦭</text><text x="196" y="232" font-size="22">🐾</text>`,
+    jungle:`<text x="250" y="236" font-size="28">🐒</text><text x="420" y="96" font-size="24">🦜</text><text x="196" y="232" font-size="22">🌺</text>`,
+    volcano:`<text x="252" y="236" font-size="26">🦎</text><text x="196" y="232" font-size="22">🥚</text>`,
+    sandbar:`<text x="560" y="270" font-size="26">🦈</text><text x="150" y="275" font-size="20">🐟</text>`
+  }[sc.id]||"";
+  s=s.replace(/<text x="262"[\s\S]*?🐚<\/text>/,deco);
+  if(sc.id==="volcano")s=s.replace('<ellipse cx="360" cy="236"',`<path d="M430 236 L520 96 L560 96 L660 236Z" fill="#4a4441"/><path d="M520 96 L560 96 L548 112 L532 112Z" fill="#e4572e"/><path d="M530 110 q-8 40 6 70" stroke="#e4572e" stroke-width="5" fill="none" opacity=".8"/>
+    <g fill="#9a9a9a" opacity=".55"><circle cx="540" cy="80" r="14"><animate attributeName="cy" values="84;30" dur="4s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0" dur="4s" repeatCount="indefinite"/></circle><circle cx="552" cy="70" r="10"><animate attributeName="cy" values="80;20" dur="3.2s" repeatCount="indefinite"/><animate attributeName="opacity" values=".6;0" dur="3.2s" repeatCount="indefinite"/></circle></g><ellipse cx="360" cy="236"`);
+  if(sc.id==="arctic"){s=s.replace('<ellipse cx="360" cy="262" rx="330" ry="34" fill="#0e7c8f"/>','<ellipse cx="360" cy="262" rx="330" ry="34" fill="#5c9fb8"/>');
+    let flakes="";for(let i=0;i<22;i++){const x=20+i*32,d=(3+(i%5)).toFixed(1);flakes+=`<circle cx="${x}" cy="-10" r="${2+(i%3)}" fill="#fff"><animate attributeName="cy" values="-10;300" dur="${d}s" begin="${(i%7)*.5}s" repeatCount="indefinite"/></circle>`}
+    s=s.replace("</svg>",flakes+"</svg>")}
+  if(sc.id==="jungle"){s=s.replace('<path d="M352 232',`<g fill="#2f8f4f"><ellipse cx="250" cy="214" rx="60" ry="30"/><ellipse cx="470" cy="214" rx="70" ry="34"/><ellipse cx="310" cy="206" rx="40" ry="26" fill="#1f7a3f"/></g><path d="M352 232`)}
+  if(sc.id==="sandbar"){s=s.replace('<ellipse cx="360" cy="236" rx="190" ry="40"','<ellipse cx="360" cy="240" rx="110" ry="28"').replace('<ellipse cx="360" cy="230" rx="175" ry="32"','<ellipse cx="360" cy="236" rx="98" ry="22"').replace(/<g><rect x="452"[\s\S]*?<\/g>/,"")}
+  return s.replace('aria-label="A small desert island with a palm tree"',`aria-label="${sc.name}"`);
+}
+function briefingHTML(sc){
+  return `<div class="brief" style="background:linear-gradient(180deg,${sc.sky[0]},${sc.sky[1]})">${islandSVG(sc)}</div>
+  <span class="sctag">${sc.em} ${esc(sc.name)} · ${esc(sc.tag)}</span>
+  <h2 style="font-size:32px;margin:10px 0 6px">You're stranded here for ${esc(sc.dur)}.</h2>
+  <p class="lead" style="font-size:19px;max-width:680px;margin:0 auto">${esc(sc.story)} Before the wreck sinks, you can grab <b>three items</b>. Only three.</p>
+  <div class="fd" style="font-size:20px;margin-top:18px;text-align:left">🗺️ Your island briefing</div>
+  <div class="facts-grid">${sc.facts.concat([NOT_THERE]).map(f=>`<div class="fact"><div class="fe">${f[0]}</div><div><div class="fl">${f[1]}</div><div>${esc(f[2])}</div></div></div>`).join("")}</div>
+  <div class="rules"><b>📜 The rules</b><ul>
+    <li>Rescue arrives in exactly <b>${esc(sc.dur)}</b> — no sooner.</li>
+    <li>You're alone, wearing ordinary everyday clothes.</li>
+    <li>Pick <b>3 items</b> — no more. Each must be something one person can carry.</li>
+    <li>No boats, working phones or other ways to escape. No other people.</li>
+    <li>There are no wrong answers — your <b>reasoning</b> is what counts.</li></ul></div>`;
+}
+function scenarioPickerHTML(sel){
+  return `<div class="scgrid">${SCENARIOS.map(x=>`<div class="sc ${sel===x.id?'on':''}" data-sc="${x.id}"><div class="se">${x.em}</div><div class="fd" style="font-size:17px">${esc(x.name)}</div><div class="muted small">${esc(x.dur)} · ${esc(x.tag)}</div></div>`).join("")}
+    <div class="sc ${sel==='random'?'on':''}" data-sc="random"><div class="se">🎲</div><div class="fd" style="font-size:17px">Random island</div><div class="muted small">A surprise, revealed at the start</div></div></div>`;
+}
+function bindScenarios(fn){app.querySelectorAll("[data-sc]").forEach(b=>b.onclick=()=>fn(b.dataset.sc))}
+function twistPickerHTML(){
+  return `<div class="fd" style="font-size:20px;margin-top:22px">🎲 Throw a twist</div><div class="muted small">Pick one to spring on the group, or let the dice decide.</div>
+  <div class="twl">${TWISTS.map((t,i)=>`<button type="button" class="tw" data-tw="${i}"><span class="te">${t.e}</span><span>${esc(t.t)}</span></button>`).join("")}
+  <button type="button" class="tw rnd" data-tw="r"><span class="te">🎲</span><span><b>Random twist</b><br>Surprise everyone</span></button></div>`;
+}
+function bindTwists(fn){app.querySelectorAll("[data-tw]").forEach(b=>b.onclick=()=>fn(b.dataset.tw==="r"?rand(TWISTS.length):+b.dataset.tw))}
 const SCENARIO_TEXT=`<h2 style="font-size:32px;margin:8px 0">You're stranded on a desert island for one year.</h2>
 <p class="lead" style="font-size:19px;max-width:640px;margin:0 auto 10px">Your plane went down. There's a freshwater spring and coconut trees — but no people, no buildings, no signal. Before the wreck sinks, you can grab <b>three items</b>. Only three.</p>`;
 
@@ -233,42 +404,80 @@ function legend(){return Object.values(CATS).map(c=>`<span><i style="background:
 function itemCard(it,on,dim,idx){
   return `<div class="item ${on?'on':''} ${dim?'dim':''}" ${idx!==undefined?`data-i="${idx}"`:''}><span class="cat" style="background:${CATS[it.c].color}"></span><div class="em">${it.e}</div><div class="nm">${esc(it.n)}</div></div>`;
 }
-function customForm(){
-  return `<form class="custom" id="cf"><input type="text" id="cn" placeholder="e.g. A lifetime supply of coffee" maxlength="40"><select id="cc" aria-label="Category">${Object.entries(CATS).map(([k,c])=>`<option value="${k}">${c.label}</option>`).join("")}</select><button class="btn sm" type="submit">Add</button></form><div class="err" id="cerr"></div>`;
-}
 /* Picker: edits `list` in place; calls onChange() after any change */
 function mountPicker(el,list,mode,onChange){
+  const fresh=()=>({text:"",emoji:null,cat:null,open:mode==='B'});
+  let cs=fresh();
   const draw=()=>{
     const slots=[0,1,2].map(i=>{const it=list[i];
-      return it?`<div class="slot full"><div class="em">${it.e}</div><div class="fd">${esc(it.n)}</div><input type="text" data-why="${i}" placeholder="Why? (optional)" value="${esc(it.why||'')}" maxlength="80"><button type="button" class="btn sec sm" style="margin-top:6px;padding:4px 10px;font-size:13px" data-rm="${i}">Remove</button></div>`
+      return it?`<div class="slot full"><div class="em">${esc(it.e)}</div><div class="fd">${esc(it.n)}</div><textarea data-why="${i}" rows="2" placeholder="Why this? (optional)" maxlength="80">${esc(it.why||'')}</textarea><button type="button" class="btn sec sm" style="margin-top:6px;padding:4px 10px;font-size:13px" data-rm="${i}">Remove</button></div>`
                :`<div class="slot"><div class="muted fd" style="font-size:22px">${i+1}</div><div class="muted small">empty</div></div>`}).join("");
+    const full=list.length>=3;
+    const custom=`<div class="cbox" data-cbox style="${cs.open&&!full?'':'display:none'}">
+        <div class="fd ctitle">✍️ ${mode==='B'?'Bring anything':'Something else'}</div>
+        <div class="crow"><div class="cprev" id="cprev">✨</div>
+          <input type="text" id="cn" class="cinput" placeholder="What would you bring? e.g. A lifetime supply of coffee" maxlength="40" autocomplete="off"></div>
+        <div class="clbl">Pick an emoji <span class="muted small" style="font-weight:600">— we suggest the closest match as you type</span></div>
+        <div class="esug" id="esug"></div>
+        <details class="emore"><summary>More emojis…</summary><div class="egrid" id="egrid">${EMOJI_PALETTE.map(e=>`<button type="button" class="ebtn" data-e="${e}">${e}</button>`).join("")}</div></details>
+        <div class="clbl">What kind of item is it?</div>
+        <div class="ccats" id="ccats"></div>
+        <div class="err" id="cerr"></div>
+        <div class="cfoot"><button type="button" class="btn" id="cadd">Add to my 3 ➕</button></div>
+      </div>`;
     el.innerHTML=`<div class="picked">${slots}</div>
-      ${mode==='B'?`<div class="fd" style="font-size:18px;margin-top:6px">✨ Anything goes — type a custom item</div>${customForm()}<div class="fd" style="font-size:18px;margin-top:6px">…or grab from the crate</div>`:''}
+      ${mode==='B'?custom+`<div class="fd" style="font-size:18px;margin-top:14px">…or grab something from the crate</div>`:''}
       <div class="legend">${legend()}</div>
-      <div class="grid">${ITEMS.map((it,i)=>itemCard(it,list.some(m=>m.n===it.n),list.length>=3&&!list.some(m=>m.n===it.n),i)).join("")}
-        ${mode==='A'?`<div class="item ${list.length>=3?'dim':''}" data-other="1" style="border:3px dashed #c7dfe2"><div class="em">➕</div><div class="nm">Something else…</div></div>`:''}</div>
-      ${mode==='A'?`<div data-otherbox style="display:none;margin-top:10px"><div class="fd" style="font-size:18px">✍️ Something else — type it in</div>${customForm()}</div>`:''}`;
+      <div class="grid">${ITEMS.map((it,i)=>itemCard(it,list.some(m=>m.n===it.n),full&&!list.some(m=>m.n===it.n),i)).join("")}
+        ${mode==='A'?`<div class="item other ${full?'dim':''}" data-other="1"><div class="em">✍️</div><div class="nm">Something else…<br><span class="muted small" style="font-family:Nunito">type anything + pick an emoji</span></div></div>`:''}</div>
+      ${mode==='A'?custom:''}`;
     el.querySelectorAll(".grid .item[data-i]").forEach(c=>c.onclick=()=>{
       const it=ITEMS[+c.dataset.i];const k=list.findIndex(m=>m.n===it.n);
-      if(k>=0)list.splice(k,1);else if(list.length<3)list.push({...it,why:""});else return;
+      if(k>=0){list.splice(k,1);play("unpick")}else if(list.length<3){list.push({...it,why:""});play("pick")}else return;
       draw();onChange();
     });
     const ob=el.querySelector("[data-other]");
-    if(ob)ob.onclick=()=>{if(list.length>=3)return;el.querySelector("[data-otherbox]").style.display="block";el.querySelector("#cn").focus()};
+    if(ob)ob.onclick=()=>{if(list.length>=3)return;cs.open=true;const b=el.querySelector("[data-cbox]");b.style.display="";if(b.scrollIntoView)b.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>el.querySelector("#cn").focus(),300);play("pick")};
     el.querySelectorAll("[data-why]").forEach(inp=>inp.oninput=()=>{list[+inp.dataset.why].why=inp.value;onChange(true)});
-    el.querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>{list.splice(+b.dataset.rm,1);draw();onChange()});
-    const f=el.querySelector("#cf");
-    if(f)f.onsubmit=e=>{e.preventDefault();const n=el.querySelector("#cn").value.trim();const er=el.querySelector("#cerr");
-      if(!n)return;if(list.length>=3){er.textContent="Already 3 items — remove one first.";return}
-      if(list.some(m=>m.n.toLowerCase()===n.toLowerCase())){er.textContent="You already have that one!";return}
-      if(/\b(boat|phone|helicopter|plane|yacht|raft)\b/i.test(n)){er.textContent="Nice try 😄 No boats, working phones or escape vehicles!";return}
-      const c=el.querySelector("#cc").value;list.push({n:n.slice(0,40),e:CAT_EM[c],c,why:"",custom:true});draw();onChange()};
+    el.querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>{list.splice(+b.dataset.rm,1);play("unpick");draw();onChange()});
+    // custom box
+    const inp=el.querySelector("#cn");
+    if(inp){
+      inp.value=cs.text;
+      inp.oninput=()=>{cs.text=inp.value;upd()};
+      inp.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();add()}};
+      el.querySelector("#cadd").onclick=add;
+      el.querySelectorAll("#egrid [data-e]").forEach(b=>b.onclick=()=>{cs.emoji=b.dataset.e;play("emoji");upd(true)});
+      upd();
+    }
   };
+  const cur=()=>{const sug=suggestEmojis(cs.text);const cat=cs.cat||guessCat(cs.text);return {sug,cat,em:cs.emoji||sug[0]||CAT_EM[cat]}};
+  function upd(bump){
+    const {sug,cat,em}=cur();
+    const pv=el.querySelector("#cprev");if(!pv)return;pv.textContent=em;
+    if(bump){pv.classList.add("bump");setTimeout(()=>pv.classList.remove("bump"),160)}
+    let opts=[...new Set([em,...sug,...DEFAULT_SUG])].slice(0,10);
+    el.querySelector("#esug").innerHTML=opts.map(e=>`<button type="button" class="ebtn ${e===em?'on':''}" data-e="${e}">${e}</button>`).join("")+(sug.length?`<span class="muted small" style="align-self:center">✨ suggested for “${esc(cs.text.trim().slice(0,24))}”</span>`:"");
+    el.querySelectorAll("#esug [data-e]").forEach(b=>b.onclick=()=>{cs.emoji=b.dataset.e;play("emoji");upd(true)});
+    el.querySelectorAll("#egrid [data-e]").forEach(b=>b.classList.toggle("on",b.dataset.e===em));
+    el.querySelector("#ccats").innerHTML=Object.entries(CATS).map(([k,c])=>`<button type="button" class="ccat ${k===cat?'on':''}" data-c="${k}" style="--ccol:${c.color}"><span style="color:${c.color}">●</span> ${c.label}</button>`).join("");
+    el.querySelectorAll("#ccats [data-c]").forEach(b=>b.onclick=()=>{cs.cat=b.dataset.c;upd()});
+  }
+  function add(){
+    const er=el.querySelector("#cerr");const n=cs.text.trim();
+    if(!n){er.textContent="Type what you'd bring first.";el.querySelector("#cn").focus();return}
+    if(list.length>=3){er.textContent="Already 3 items — remove one first.";return}
+    if(list.some(m=>m.n.toLowerCase()===n.toLowerCase())){er.textContent="You already have that one!";return}
+    if(/\b(boat|phone|smartphone|iphone|helicopter|plane|yacht|raft|jet ?ski|satellite)\b/i.test(n)){er.textContent="Nice try 😄 No boats, working phones or ways to escape!";return}
+    const {cat,em}=cur();
+    list.push({n:n.slice(0,40),e:em,c:cat,why:"",custom:true});
+    cs=fresh();play("pick");draw();onChange();
+  }
   draw();
 }
-function beachHTML(picks){
-  const pos=["4%","35%","66%"];
-  return `<div class="beach"><div class="sunb"></div><div class="wave"></div>
+function beachHTML(picks,sc){
+  const pos=["4%","35%","66%"];sc=sc||SCENARIOS[0];
+  return `<div class="beach" style="background:linear-gradient(180deg,${sc.sky[0]} 0%,${sc.sky[1]} 55%,${sc.sand} 55%,${sc.sandD} 100%)"><div class="sunb"></div><div class="wave"></div>
     ${picks.map((it,i)=>`<div class="crate" style="left:${pos[i]};animation-delay:${i*0.35}s"><div class="box" style="border-bottom:5px solid ${(CATS[it.c]||CATS.comfort).color}"><div class="em">${esc(it.e)}</div><div class="nm">${esc(it.n)}</div>${it.why?`<div class="why">“${esc(it.why)}”</div>`:''}</div></div>`).join("")}
   </div>`;
 }
@@ -313,7 +522,7 @@ function summaryText(entries){
   return "Non-P0 island · Desert Island results\n\n"+entries.map(p=>`${p.name}: ${p.picks.map(i=>i.n+(i.why?` (${i.why})`:'')).join(", ")}`).join("\n");
 }
 async function copyText(t,okMsg){try{await navigator.clipboard.writeText(t);toast(okMsg||"Copied!")}catch(e){toast("Couldn't copy here — select and copy it manually.")}}
-function twistHTML(t){return `<div class="big">${t.e}</div><h2>${t.t}</h2><p style="font-size:18px">${t.q}</p>`}
+function twistHTML(t){play("twist");return `<div class="big">${t.e}</div><h2>${t.t}</h2><p style="font-size:18px">${t.q}</p>`}
 
 /* ---------- HOME ---------- */
 let NET={me:null,status:"connecting"};
@@ -329,8 +538,14 @@ function home(keepHash){
     ${ISLAND}
     <h1>Non-P0 <span class="o">island</span></h1>
     <div class="fd" style="font-size:24px;color:var(--sea)">Desert Island · the ice breaker</div>
-    <p class="lead">Stranded for one year. Three items. Defend your choices — and discover who's a survivor and who's packing a guitar.</p>
-    <div class="facts"><span class="chip">👥 5–25 people</span><span class="chip">⏱️ 10–15 min</span><span class="chip">🌴 Easy</span></div>
+    <p class="lead">You're stranded on an island with nothing but the clothes you're wearing. Before the wreck sinks you can save <b>three items</b>. What do you grab — and why?</p>
+    <div class="howto">
+      <div><b>1 · 🗺️ Meet the island</b>The host picks an island. Everyone reads the briefing: water, food, weather and how long until rescue.</div>
+      <div><b>2 · 🤫 Pick 3 items</b>Choose from the crate or invent your own. You get a couple of minutes to decide.</div>
+      <div><b>3 · 🎤 Defend them</b>One by one, your items wash ashore and you explain your choices.</div>
+      <div><b>4 · 📊 See the patterns</b>Who's a Survivor, a Builder, a Comfort-Seeker? Then the host throws a twist.</div>
+    </div>
+    <div class="facts"><span class="chip">👥 5–25 people</span><span class="chip">⏱️ 10–15 min</span><span class="chip">🌴 Easy</span><span class="chip">🔊 Sound on? Tap 🔊 / 🌊 up top</span></div>
     ${statusMsg?`<div class="muted" style="font-weight:700">${statusMsg}</div>`:''}
     <div class="homecards">
       <div class="hc"><h3>🛶 Host a lobby</h3><div class="muted small grow">Create a game, share the link, and everyone plays from their own phone or laptop — no sign-up needed.</div>
@@ -356,7 +571,7 @@ $("#logo").onclick=()=>{leaveOnline();home()};
 function setHash(h){try{if(h)history.replaceState(null,"","#"+h);else if(location.hash)history.replaceState(null,"",location.pathname+location.search)}catch(e){}}
 
 /* ---------- LOCAL (one-screen) MODE ---------- */
-const L={step:1,players:[],mode:"A",think:120,turn:0,picks:{}};
+const L={step:1,players:[],mode:"A",think:120,turn:0,picks:{},scenario:"tropical",active:"tropical"};
 const LSTEPS=["Welcome","Setup","Scenario","Think","Share","Patterns"];
 function lgo(n){L.step=n;localRender();window.scrollTo({top:0,behavior:"smooth"})}
 function localRender(){clearTick();stepper(LSTEPS,L.step);[home,lSetup,lScenario,lThink,lShare,lResults][L.step]()}
@@ -371,6 +586,7 @@ function lSetup(){
     <div class="row small"><span class="muted" id="pcount"></span>
       <button type="button" class="btn sec sm" id="sampleb">Add sample players</button>
       <button type="button" class="btn sec sm" id="clearb">Clear</button></div>
+    <h2>Choose the island 🗺️</h2>${scenarioPickerHTML(L.scenario)}
     <h2>Pick the mode</h2>${modesHTML(L.mode)}
     <h2>Think time</h2>${thinkHTML(L.think)}
     <div class="err" id="err" style="margin-top:14px"></div>
@@ -390,11 +606,11 @@ function lSetup(){
   $("#addf").onsubmit=e=>{e.preventDefault();$("#pname").value.split(",").map(x=>x.trim()).filter(Boolean).forEach(add);$("#pname").value="";draw();$("#pname").focus()};
   $("#sampleb").onclick=()=>{["Ava","Liam","Noah","Zara","Kenji","Priya"].forEach(add);draw()};
   $("#clearb").onclick=()=>{L.players=[];draw()};
-  bindModes(m=>{L.mode=m;lSetup()});bindThink(t=>{L.think=t;lSetup()});
+  bindModes(m=>{L.mode=m;lSetup()});bindThink(t=>{L.think=t;lSetup()});bindScenarios(x=>{L.scenario=x;lSetup()});
   $("#backb").onclick=home;
   $("#nextb").onclick=()=>{
     if(L.players.length<2){$("#err").textContent="Add at least 2 players (the game is designed for 5–25).";return}
-    L.picks={};L.players.forEach(p=>L.picks[p]=[]);L.turn=0;lgo(2)};
+    L.active=resolveSc(L.scenario);L.picks={};L.players.forEach(p=>L.picks[p]=[]);L.turn=0;lgo(2)};
 }
 function modesHTML(mode){return `<div class="modes">
   <div class="mode ${mode==='A'?'on':''}" data-m="A"><h3>📋 Option A · The crate</h3><div class="muted">Choose from 20 items (plus "something else"). Great for big or quiet groups.</div></div>
@@ -403,9 +619,10 @@ function thinkHTML(t){return `<div class="row">${[60,120,180].map(x=>`<button ty
 function bindModes(fn){app.querySelectorAll(".mode").forEach(m=>m.onclick=()=>fn(m.dataset.m))}
 function bindThink(fn){app.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>fn(+b.dataset.t))}
 function lScenario(){
-  app.innerHTML=`<div class="panel center">${ISLAND}${SCENARIO_TEXT}
-    <div class="facts"><span class="chip">✅ No wrong answers</span><span class="chip">💬 Your reasoning matters most</span><span class="chip">${L.mode==='A'?'📋 Pick from the crate':'✨ Anything you can carry'}</span></div>
+  app.innerHTML=`<div class="panel center">${L.scenario==='random'?'<div class="fd" style="font-size:20px;margin-bottom:6px">🎲 Your random island is…</div>':''}${briefingHTML(scOf(L.active))}
+    <div class="facts"><span class="chip">${L.mode==='A'?'📋 Pick from the crate (or invent your own)':'✨ Anything you can carry'}</span><span class="chip">⏱️ ${L.think/60} min to decide</span></div>
     <div class="row" style="justify-content:center"><button class="btn sec" id="b">← Back</button><button class="btn" id="n">Start thinking ⏱️</button></div></div>`;
+  play("whoosh");
   $("#b").onclick=()=>lgo(1);$("#n").onclick=()=>lgo(3);
 }
 function timerHTML(){const R=96,C=2*Math.PI*R;return `<div class="ring"><svg width="220" height="220"><circle cx="110" cy="110" r="${R}" stroke="#e3f4f6" stroke-width="16" fill="none"/>
@@ -417,7 +634,7 @@ function lThink(){
   let left=L.think,paused=false;
   app.innerHTML=`<div class="panel center">
     <h2 style="margin-top:0">Pick your 3 items — silently! 🤫</h2>
-    <p class="muted">Everyone decide now. You'll reveal them one by one in the share round.</p>
+    <p class="muted">${scOf(L.active).em} ${esc(scOf(L.active).name)} · ${esc(scOf(L.active).dur)}. Everyone decide now — you'll reveal them one by one in the share round.</p>
     ${timerHTML()}<div class="hint" id="hint">💡 ${pick(HINTS)}</div>
     ${L.mode==='A'?`<details style="text-align:left;margin:10px 0"><summary class="fd" style="cursor:pointer;font-size:18px">📦 Peek in the crate (20 items)</summary><div class="legend" style="margin-top:12px">${legend()}</div><div class="grid">${ITEMS.map(it=>itemCard(it)).join("")}</div></details>`:''}
     <div class="row" style="justify-content:center;margin-top:10px">
@@ -425,7 +642,8 @@ function lThink(){
     </div></div>`;
   drawTimer(left,L.think);
   tick=setInterval(()=>{if(paused)return;left--;drawTimer(left,L.think);if(left%25===0&&left>0)$("#hint").textContent="💡 "+pick(HINTS);
-    if(left<=0){clearTick();$("#hint").textContent="⏰ Time's up! Lock in your three.";}},1000);
+    if(left>0&&left<=10)play("tick");
+    if(left<=0){clearTick();play("gong");$("#hint").textContent="⏰ Time's up! Lock in your three.";}},1000);
   $("#hintb").onclick=()=>$("#hint").textContent="💡 "+pick(HINTS);
   $("#pauseb").onclick=e=>{paused=!paused;e.target.textContent=paused?"Resume":"Pause"};
   $("#doneb").onclick=()=>lgo(4);
@@ -444,17 +662,19 @@ function lShare(){
   mountPicker($("#picker"),mine,L.mode,()=>{$("#revb").disabled=mine.length<3});
   $("#backb").onclick=()=>{if(L.turn===0)lgo(3);else{L.turn--;L.picks[L.players[L.turn]].revealed=true;lShare()}};
   $("#revb").onclick=()=>{mine.revealed=true;lShare()};
+  play("turn");
 }
 function lReveal(p,mine){
   const last=L.turn===L.players.length-1;
   app.innerHTML=`<div class="panel">
     <div class="turnhead"><h2>🏝️ ${esc(p)} brought…</h2><div class="progress">Castaway ${L.turn+1} of ${L.players.length}</div></div>
-    ${beachHTML(mine)}
+    ${beachHTML(mine,scOf(L.active))}
     <div class="q"><span class="qi">❓</span><span id="qq">${pick(QUESTIONS)}</span></div>
     <div class="row" style="justify-content:space-between">
       <div class="row"><button class="btn sec sm" id="qb">Another question</button><button class="btn sec sm" id="eb">✏️ Edit picks</button></div>
       <button class="btn" id="nb">${last?'See the patterns 📊':'Next castaway →'}</button>
     </div></div>`;
+  [0,350,700].forEach(d=>play("splash",d+150));
   $("#qb").onclick=()=>$("#qq").textContent=pick(QUESTIONS);
   $("#eb").onclick=()=>{mine.revealed=false;lShare()};
   $("#nb").onclick=()=>{if(last)lgo(5);else{L.turn++;lShare();window.scrollTo({top:0,behavior:"smooth"})}};
@@ -462,11 +682,12 @@ function lReveal(p,mine){
 function lResults(){
   const entries=L.players.map(p=>({name:p,picks:L.picks[p]}));
   app.innerHTML=`<div class="panel results">${resultsHTML(entries)}
+    ${twistPickerHTML()}
     <div class="row" style="justify-content:space-between;margin-top:20px">
-      <div class="row"><button class="btn sec" id="tw">🎲 Throw a twist</button><button class="btn sec" id="cp">📋 Copy summary</button></div>
+      <button class="btn sec" id="cp">📋 Copy summary</button>
       <button class="btn" id="again">Play again 🔁</button></div></div>`;
-  animateBars();
-  $("#tw").onclick=()=>showOverlay(twistHTML(pick(TWISTS)));
+  animateBars();play("fanfare",200);
+  bindTwists(i=>showOverlay(twistHTML(TWISTS[i])));
   $("#cp").onclick=()=>copyText(summaryText(entries),"Copied! Paste it into your chat or notes.");
   $("#again").onclick=()=>{L.picks={};L.turn=0;lgo(1)};
 }
@@ -486,7 +707,7 @@ const inRound=p=>p.round===O.game.round;
 const lockedPlayers=()=>O.players.filter(p=>inRound(p)&&p.locked&&Array.isArray(p.picks)&&p.picks.length===3).sort((a,b)=>(a.joinedAt||0)-(b.joinedAt||0));
 function setNet(txt,kind){const el=$("#netst");if(!el)return;el.textContent=txt||"";el.style.display=txt?"inline-block":"none";el.style.background=kind==="bad"?"#ffe1d6":kind==="ok"?"#e6f6ee":"#fff6df"}
 const str=(v,n)=>String(v??"").slice(0,n);
-function sanitizePicks(a){if(!Array.isArray(a))return[];return a.slice(0,3).map(x=>({n:str(x&&x.n,40).trim(),e:str(x&&x.e,8),c:CATS[x&&x.c]?x.c:"comfort",why:str(x&&x.why,80)})).filter(x=>x.n)}
+function sanitizePicks(a){if(!Array.isArray(a))return[];return a.slice(0,3).map(x=>({n:str(x&&x.n,40).trim(),e:str(x&&x.e,16),c:CATS[x&&x.c]?x.c:"comfort",why:str(x&&x.why,80)})).filter(x=>x.n)}
 function parse(d){try{const m=typeof d==="string"?JSON.parse(d):d;return m&&typeof m==="object"?m:null}catch(e){return null}}
 
 /* host side */
@@ -514,7 +735,7 @@ function sendState(id){const c=O.conns[id];try{if(c&&c.open)c.send(JSON.stringif
 function createLobby(nick){
   if(!nick){$("#herr").textContent="Enter your name first.";return}
   store.set("np0-nick",nick);
-  HS={game:{host:NET.me,phase:"lobby",mode:"A",think:120,round:1,order:[],turn:0,q:"",twist:null,thinkEnd:0},
+  HS={game:{host:NET.me,phase:"lobby",mode:"A",think:120,scenario:"tropical",active:"tropical",round:1,order:[],turn:0,q:"",twist:null,thinkEnd:0},
       players:{[NET.me]:{nick,joinedAt:Date.now(),round:1,picks:[],locked:false,online:true}}};
   startHost(genCode(),true);
 }
@@ -599,7 +820,7 @@ function renderOnline(){
   if(!O.code||!O.game)return;
   const g=O.game,me=myDoc();
   stepper(OSTEPS,PHASES.indexOf(g.phase));
-  const key=[g.phase,g.round,g.turn,g.q,(g.order||[]).join(","),isHost(),!!me,me&&inRound(me)&&me.locked,g.mode,g.think,g.thinkEnd,g.phase==="results"?lockedPlayers().map(p=>p.id+JSON.stringify(p.picks)).join("|"):"",g.phase==="share"?JSON.stringify((O.players.find(p=>p.id===(g.order||[])[g.turn])||{}).picks||[]):""].join("~");
+  const key=[g.phase,g.round,g.turn,g.q,(g.order||[]).join(","),isHost(),!!me,me&&inRound(me)&&me.locked,g.mode,g.think,g.scenario,g.active,g.thinkEnd,g.phase==="results"?lockedPlayers().map(p=>p.id+JSON.stringify(p.picks)).join("|"):"",g.phase==="share"?JSON.stringify((O.players.find(p=>p.id===(g.order||[])[g.turn])||{}).picks||[]):""].join("~");
   if(key!==O.viewKey){O.viewKey=key;clearTick();({lobby:oLobby,scenario:oScenario,think:oThink,share:oShare,results:oResults})[g.phase]()}
   refreshLive();
 }
@@ -610,6 +831,7 @@ function playersHTML(){
     return `<span class="ptag ${p.id===NET.me?'me':''}" style="padding-right:14px;${p.online===false?'opacity:.5':''}" title="${p.online===false?'disconnected':''}">${st?`<span class="st">${st}</span>`:''}${esc(p.nick||"Castaway")}${p.id===g.host?' <span class="pill host" style="padding:1px 8px">host</span>':''}${p.id===NET.me?' <span class="muted small">(you)</span>':''}</span>`}).join("")||`<span class="muted">Nobody here yet.</span>`;
 }
 function refreshLive(){
+  const n0=O.players.length;if(O.lastCount!==undefined&&n0>O.lastCount&&O.game.phase==="lobby")play("join");O.lastCount=n0;
   const el=$("#oplayers");if(el)el.innerHTML=playersHTML();
   const c=$("#ocount");if(c){const n=O.players.length;const l=lockedPlayers().length;c.textContent=O.game.phase==="think"?`${l} of ${n} locked in`:`${n} castaway${n===1?'':'s'} on the island`}
   const sb=$("#startshare");if(sb)sb.disabled=lockedPlayers().length<1;
@@ -636,23 +858,25 @@ function oLobby(){
     <h3 id="ocount" style="margin-bottom:4px"></h3>
     <div class="players" id="oplayers" style="justify-content:center"></div>
     ${isHost()?`<div class="hostbar" style="text-align:left"><div class="lbl">🎙️ Host controls</div>
+      <div class="fd" style="font-size:18px">Island</div>${scenarioPickerHTML(g.scenario||"tropical")}
       <div class="fd" style="font-size:18px">Mode</div>${modesHTML(g.mode)}
       <div class="fd" style="font-size:18px;margin-bottom:8px">Think time</div>${thinkHTML(g.think)}
       <div class="row" style="justify-content:flex-end;margin-top:14px"><button class="btn" id="startb">Everyone's here — start! 🚀</button></div></div>`
-      :`<p class="fd" style="font-size:20px;margin-top:18px">⏳ Waiting for the host to start…</p><p class="muted">Mode: ${g.mode==='A'?'📋 The crate':'✨ Anything goes'} · Think time: ${g.think/60} min</p>`}
+      :`<p class="fd" style="font-size:20px;margin-top:18px">⏳ Waiting for the host to start…</p><p class="muted">Island: ${g.scenario==='random'||!g.scenario?'🎲 Mystery island':scOf(g.scenario).em+' '+esc(scOf(g.scenario).name)} · Mode: ${g.mode==='A'?'📋 The crate':'✨ Anything goes'} · Think time: ${g.think/60} min</p>`}
     <div style="margin-top:14px">${leaveBtn()}</div>
   </div>`;
   $("#cpl").onclick=()=>copyText(link,"Link copied — share it with your team!");
   bindJoinBox();bindLeave();
-  if(isHost()){bindModes(m=>gset({mode:m}));bindThink(t=>gset({think:t}));$("#startb").onclick=()=>gset({phase:"scenario"})}
+  if(isHost()){bindModes(m=>gset({mode:m}));bindThink(t=>gset({think:t}));bindScenarios(x=>gset({scenario:x}));$("#startb").onclick=()=>gset({phase:"scenario",active:resolveSc(g.scenario||"tropical")})}
 }
 function oScenario(){
-  app.innerHTML=`<div class="panel center">${ISLAND}${SCENARIO_TEXT}
-    <div class="facts"><span class="chip">✅ No wrong answers</span><span class="chip">💬 Your reasoning matters most</span><span class="chip">${O.game.mode==='A'?'📋 Pick from the crate':'✨ Anything you can carry'}</span></div>
+  const g=O.game;
+  app.innerHTML=`<div class="panel center">${g.scenario==='random'?'<div class="fd" style="font-size:20px;margin-bottom:6px">🎲 Your random island is…</div>':''}${briefingHTML(scOf(g.active))}
+    <div class="facts"><span class="chip">${g.mode==='A'?'📋 Pick from the crate (or invent your own)':'✨ Anything you can carry'}</span><span class="chip">⏱️ ${g.think/60} min to decide</span></div>
     ${joined()?'':joinBox()}
     ${isHost()?hostOnly(`<div class="row" style="justify-content:center"><button class="btn sec sm" id="bk">← Back to lobby</button><button class="btn" id="go">Start the ${O.game.think/60}-min think timer ⏱️</button></div>`):`<p class="fd" style="font-size:20px">Get ready… the host will start the timer.</p>`}
   </div>`;
-  bindJoinBox();
+  bindJoinBox();play("whoosh");
   if(isHost()){$("#bk").onclick=()=>gset({phase:"lobby"});$("#go").onclick=()=>gset({phase:"think",thinkEnd:Date.now()+O.game.think*1000})}
 }
 function oThink(){
@@ -661,8 +885,8 @@ function oThink(){
   if(O.draftKey!==dk){O.draftKey=dk;O.draft=me&&inRound(me)&&Array.isArray(me.picks)?me.picks.map(x=>({...x})):[]}
   const locked=me&&inRound(me)&&me.locked;
   app.innerHTML=`<div class="panel">
-    <div class="row" style="justify-content:space-between;align-items:flex-start">
-      <div><h2 style="margin:0">Pick your 3 items 🤫</h2><p class="muted" style="margin:4px 0 0">Choose on your own device — nobody sees your picks until the share round.</p></div>
+    <div class="row" style="justify-content:space-between;align-items:flex-start;flex-wrap:nowrap">
+      <div><h2 style="margin:0">Pick your 3 items 🤫</h2><p class="muted" style="margin:4px 0 0">${scOf(g.active).em} ${esc(scOf(g.active).name)} · ${esc(scOf(g.active).dur)}. Choose on your own device — nobody sees your picks until the share round.</p></div>
       <div style="width:160px;height:160px;transform:scale(.72);transform-origin:top right">${timerHTML()}</div>
     </div>
     <div class="hint" id="hint">💡 ${pick(HINTS)}</div>
@@ -673,13 +897,16 @@ function oThink(){
   </div>`;
   bindJoinBox();
   const total=g.think;
-  const upd=()=>{const left=(g.thinkEnd-Date.now())/1000;drawTimer(left,total);if(left<=0&&$("#hint")&&!O.tu){O.tu=1;$("#hint").textContent="⏰ Time's up! Lock in your three."}};
+  let lastSec=null;
+  const upd=()=>{const left=(g.thinkEnd-Date.now())/1000;drawTimer(left,total);const sec=Math.ceil(left);
+    if(lastSec!==null&&sec!==lastSec){if(sec>0&&sec<=10)play("tick");if(sec<=0&&lastSec>0)play("gong")}lastSec=sec;
+    if(left<=0&&$("#hint")&&!O.tu){O.tu=1;$("#hint").textContent="⏰ Time's up! Lock in your three."}};
   O.tu=0;upd();let n=0;tick=setInterval(()=>{upd();if(++n%25===0&&!O.tu)$("#hint").textContent="💡 "+pick(HINTS)},1000);
   if(me&&!locked){
     const lb=$("#lockb"),lh=$("#lockhint");
     const st=()=>{lb.disabled=O.draft.length<3;lh.textContent=O.draft.length<3?`${3-O.draft.length} more to go `:""};
     mountPicker($("#picker"),O.draft,g.mode,st);st();
-    lb.onclick=()=>{const picks=O.draft.map(({n,e,c,why})=>({n,e,c,why:(why||"").slice(0,80)}));act({t:"lock",picks})};
+    lb.onclick=()=>{const picks=O.draft.map(({n,e,c,why})=>({n,e,c,why:(why||"").slice(0,80)}));play("lock");act({t:"lock",picks})};
   }
   const ub=$("#unlock");if(ub)ub.onclick=()=>act({t:"unlock"});
   if(isHost()){
@@ -696,11 +923,12 @@ function oShare(){
   app.innerHTML=`<div class="panel">
     ${pid===NET.me?`<div class="yourturn">🎤 It's your turn! Tell everyone why you picked these.</div>`:''}
     <div class="turnhead"><h2>🏝️ ${esc(name)} brought…</h2><div class="progress">Castaway ${g.turn+1} of ${order.length}</div></div>
-    ${picks.length?beachHTML(picks):`<p class="muted">Their crate floated away (they left the game).</p>`}
+    ${picks.length?beachHTML(picks,scOf(g.active)):`<p class="muted">Their crate floated away (they left the game).</p>`}
     <div class="q"><span class="qi">❓</span><span>${esc(g.q)}</span></div>
     ${hostOnly(`<div class="row" style="justify-content:space-between"><div class="row"><button class="btn sec sm" id="pv" ${g.turn===0?'disabled':''}>← Previous</button><button class="btn sec sm" id="qb">Another question</button></div><button class="btn" id="nb">${last?'See the patterns 📊':'Next castaway →'}</button></div>`)}
     ${isHost()?'':`<p class="muted center">The host moves to the next castaway.</p>`}
   </div>`;
+  if(pid===NET.me)play("turn");if(picks.length)[0,350,700].forEach(d=>play("splash",d+150));
   if(isHost()){
     $("#qb").onclick=()=>{let nq;do{nq=pick(QUESTIONS)}while(nq===g.q);gset({q:nq})};
     $("#pv").onclick=()=>gset({turn:Math.max(0,g.turn-1),q:pick(QUESTIONS)});
@@ -713,12 +941,13 @@ function oResults(){
   app.innerHTML=`<div class="panel results">${resultsHTML(entries)}
     <div class="row" style="justify-content:space-between;margin-top:20px">
       <button class="btn sec" id="cp">📋 Copy summary</button>
-      ${isHost()?`<div class="row"><button class="btn sec" id="tw">🎲 Throw a twist (everyone sees it)</button><button class="btn" id="again">New round 🔁</button></div>`:`<span class="muted">The host can throw a twist or start a new round.</span>`}
-    </div></div>`;
-  animateBars();
+      ${isHost()?`<button class="btn" id="again">New round 🔁</button>`:`<span class="muted">The host can throw a twist or start a new round.</span>`}
+    </div>
+    ${isHost()?`<div class="hostbar">${twistPickerHTML().replace('Pick one to spring on the group','Everyone sees it on their screen. Pick one')}</div>`:''}</div>`;
+  animateBars();play("fanfare",200);
   $("#cp").onclick=()=>copyText(summaryText(entries),"Copied! Paste it into your chat or notes.");
   if(isHost()){
-    $("#tw").onclick=()=>gset({twist:{i:rand(TWISTS.length),ts:Date.now()}});
+    bindTwists(i=>gset({twist:{i,ts:Date.now()}}));
     $("#again").onclick=()=>gset({phase:"lobby",round:g.round+1,order:[],turn:0,twist:null,thinkEnd:0});
   }
 }
