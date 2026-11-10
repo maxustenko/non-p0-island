@@ -242,6 +242,7 @@ body.th-jungle .fact,body.th-jungle .item,body.th-jungle .slot{border-radius:22p
 
 body.th-volcano{--sea:#ff7a3d;--sea-deep:#ffb38a;--sun:#ff5a1f;--sunsh:#8a2203;--btnink:#fff;--card:#221a18;--card2:#2c2220;--tile:#332825;--tile2:#3d2f2b;--line:#4d3b36;--line2:#5e4741;--soft:#3a2d29;--hl:#4d2a1c;--sel:#45302a;--track:#3d2f2b;--okbg:#2c3824;--ink:#f6e9e2;--muted:#c4a89c;--secsh:#000;
   --bg:radial-gradient(ellipse at 50% 115%,#ff5a1f55 0%,transparent 55%),linear-gradient(180deg,#0f0a09 0%,#24130f 60%,#3a1a10 100%);--prad:8px}
+body.th-volcano{--tbar:#5a1e0c}
 body.th-volcano .panel{border:1px solid #ff6a2b66;box-shadow:0 0 0 1px #000,0 0 50px #ff5a1f30}
 body.th-volcano h1,body.th-volcano h2{text-transform:uppercase;letter-spacing:1.5px}
 body.th-volcano .btn{border-radius:6px}
@@ -261,6 +262,30 @@ body.th-sandbar .btn{border-radius:4px;box-shadow:3px 3px 0 #06606a}
 body.th-sandbar .btn:active{box-shadow:0 0 0 #06606a;transform:translate(3px,3px)}
 body.th-sandbar .stepper div{border-radius:3px}
 body.th-sandbar .fact,body.th-sandbar .item,body.th-sandbar .slot,body.th-sandbar .stat,body.th-sandbar .arch{border-radius:4px;border:1.5px solid var(--line)}
+
+/* ===== sticky timer bar ===== */
+.tbar{position:fixed;top:0;left:0;right:0;z-index:65;background:var(--tbar,var(--sea-deep));color:#fff;box-shadow:0 4px 18px rgba(0,0,0,.22);display:none;overflow:hidden}
+.tbar.show{display:block;animation:tbIn .35s ease}
+@keyframes tbIn{from{transform:translateY(-100%)}to{transform:none}}
+.tbar .tfill{position:absolute;left:0;top:0;bottom:0;width:100%;background:rgba(255,255,255,.16);transition:width 1s linear}
+.tbar .tin{position:relative;display:flex;align-items:center;justify-content:center;gap:16px;padding:8px 16px;max-width:1040px;margin:0 auto}
+.tbar .tnum{font-family:Fredoka,Nunito,system-ui,-apple-system,'Segoe UI',sans-serif;font-weight:700;font-size:32px;line-height:1.1;font-variant-numeric:tabular-nums;min-width:96px;text-align:center;display:inline-block}
+.tbar .tlbl,.tbar .tsub{font-weight:800;font-size:14px;opacity:.92;white-space:nowrap}
+.tbar.warn{background:#d6401a}
+.tbar.warn .tnum{animation:tPulse 1s ease-in-out infinite}
+.tbar.done{background:#7a1f0b}
+@keyframes tPulse{50%{transform:scale(1.2)}}
+body.timer-on .wrap{padding-top:70px}
+#blink{position:fixed;inset:0;pointer-events:none;z-index:64}
+#blink.on{animation:blinkA .85s ease-out}
+#blink.big{animation:blinkA 1.4s ease-out}
+@keyframes blinkA{0%{box-shadow:inset 0 0 0 16px rgba(228,64,26,.95);background:rgba(228,64,26,.22)}100%{box-shadow:inset 0 0 0 0 rgba(228,64,26,0);background:rgba(228,64,26,0)}}
+.announce{position:fixed;left:50%;top:84px;z-index:66;background:var(--sun);color:var(--btnink);font-family:Fredoka,Nunito,system-ui,-apple-system,'Segoe UI',sans-serif;font-weight:700;font-size:clamp(22px,4.4vw,36px);padding:14px 30px;border-radius:18px;box-shadow:0 12px 34px rgba(0,0,0,.28);display:none;white-space:nowrap;pointer-events:none;transform:translateX(-50%)}
+.announce.show{display:block;animation:annIn 2.8s ease both}
+.announce.red{background:#d6401a;color:#fff}
+@keyframes annIn{0%{opacity:0;transform:translate(-50%,-24px) scale(.8)}12%{opacity:1;transform:translate(-50%,0) scale(1.06)}20%{transform:translate(-50%,0) scale(1)}85%{opacity:1}100%{opacity:0;transform:translate(-50%,0)}}
+@media(max-width:520px){.tbar .tlbl{display:none}.tbar .tnum{font-size:28px;min-width:80px}.tbar .tsub{font-size:12px;white-space:normal;max-width:45vw}.announce{white-space:normal;text-align:center;width:max-content;max-width:90vw}}
+@media (prefers-reduced-motion: reduce){#blink.on,#blink.big{animation:none;box-shadow:inset 0 0 0 10px rgba(228,64,26,.9)}.tbar.warn .tnum{animation:none}}
 
 /* ===== intro animation ===== */
 .intro{position:fixed;inset:0;z-index:80;display:none;place-items:center;overflow:hidden;cursor:pointer}
@@ -323,6 +348,9 @@ body.th-sandbar .fact,body.th-sandbar .item,body.th-sandbar .slot,body.th-sandba
 <div class="overlay" id="overlay"><div class="panel" id="overlayBody"></div></div>
 <div class="toast" id="toast"></div>
 <div class="intro" id="intro" aria-hidden="true"></div>
+<div class="tbar" id="tbar" role="timer" aria-live="off"><div class="tfill" id="tbfill"></div><div class="tin"><span class="tlbl" id="tblbl">⏱️ Pick your 3 items</span><span class="tnum" id="tbnum">0:00</span><span class="tsub" id="tbsub"></span></div></div>
+<div id="blink" aria-hidden="true"></div>
+<div class="announce" id="announce" role="status" aria-live="assertive"></div>
 
 <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script>
@@ -427,6 +455,7 @@ const SFX={
   birds:()=>{[0,.18,.5,.66].forEach((w,i)=>tone(i%2?2400:2000,.1,"sine",.06,w,i%2?1800:2900))},
   rumble:()=>{tone(48,2.2,"sawtooth",.12,0,35);noise(2.2,.5,120,0,.6)},
   boom:()=>{tone(70,1.2,"sine",.3,0,30);noise(1.2,.6,400,0,.5)},
+  announce:()=>{[784,988,1175].forEach((f,i)=>tone(f,.22,"triangle",.11,i*.11))},
   gulls:()=>{tone(1500,.25,"triangle",.06,0,900);tone(1600,.3,"triangle",.06,.32,950)},
   twist:()=>{tone(180,.6,"sawtooth",.08,0,70);noise(.9,.25,350,0,.7);tone(880,.12,"square",.05,.55);tone(660,.2,"square",.05,.68)}
 };
@@ -525,12 +554,38 @@ function twistPickerHTML(){
 }
 function bindTwists(fn){app.querySelectorAll("[data-tw]").forEach(b=>b.onclick=()=>fn(b.dataset.tw==="r"?rand(TWISTS.length):+b.dataset.tw))}
 
+/* ---------- sticky timer, blink, announcements ---------- */
+const TB={prev:null,annT:null};
+const fmtT=x=>`${Math.floor(x/60)}:${String(x%60).padStart(2,"0")}`;
+function showTimerBar(sub){const b=document.getElementById("tbar");b.className="tbar show";document.getElementById("tbsub").textContent=sub||"";document.getElementById("tblbl").textContent="⏱️ Pick your 3 items";document.body.classList.add("timer-on");TB.prev=null}
+function hideTimerBar(){const b=document.getElementById("tbar");if(b)b.className="tbar";document.body.classList.remove("timer-on");TB.prev=null}
+function timerPaused(on){const l=document.getElementById("tblbl");if(l)l.textContent=on?"⏸️ Paused":"⏱️ Pick your 3 items"}
+function blinkScreen(big){const b=document.getElementById("blink");b.className="";void b.offsetWidth;b.className=big?"big":"on"}
+function say(t){if(!SND.fx)return;try{if(!("speechSynthesis" in window))return;const u=new SpeechSynthesisUtterance(t);u.rate=1.05;u.pitch=1.05;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+function announce(text,speech,red){const a=document.getElementById("announce");a.textContent=text;a.className="announce";void a.offsetWidth;a.className="announce show"+(red?" red":"");
+  clearTimeout(TB.annT);TB.annT=setTimeout(()=>{a.className="announce"},2900);play("announce");if(speech)setTimeout(()=>say(speech),450)}
+function timerTick(left,total){
+  left=Math.max(0,Math.ceil(left));
+  const bar=document.getElementById("tbar");if(!bar||!bar.classList.contains("show"))return;
+  document.getElementById("tbnum").textContent=left>0?fmtT(left):"Time's up!";
+  document.getElementById("tbfill").style.width=(total>0?Math.min(100,left/total*100):0)+"%";
+  bar.classList.toggle("warn",left>0&&left<=10);bar.classList.toggle("done",left===0);
+  const p=TB.prev;
+  if(p!==null&&left!==p){
+    if(p>60&&left<=60&&left>0)announce("⏰ 1 minute left!","One minute left");
+    if(p>30&&left<=30&&left>0)announce("⏳ 30 seconds left!","Thirty seconds left");
+    if(left>0&&left<=10){blinkScreen();play("tick");if(left===10)say("Ten seconds")}
+    if(left===0&&p>0){blinkScreen(true);play("gong");announce("⏰ Time's up! Lock in your three.","Time's up",true)}
+  }
+  TB.prev=left;
+}
+
 /* ---------- island themes + intro ---------- */
 const REDUCED=(()=>{try{return matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}})();
 let curTheme=null;
 function applyTheme(id){
   if(curTheme===id)return;curTheme=id;
-  document.body.className=id?"th-"+id:"";
+  [...document.body.classList].filter(c=>c.startsWith("th-")).forEach(c=>document.body.classList.remove(c));if(id)document.body.classList.add("th-"+id);
   const fx=document.getElementById("fx");if(!fx)return;fx.innerHTML="";
   if(REDUCED||!id)return;
   const r=(a,b)=>a+Math.random()*(b-a);let h="";
@@ -701,7 +756,7 @@ let NET={me:null,status:"connecting"};
 NET.me=(()=>{let id=store.get("np0-id");if(!id){id="u"+Math.random().toString(36).slice(2,12);store.set("np0-id",id)}return id})();
 const INIT_HASH=(location.hash||"").replace("#","").toUpperCase();
 function home(keepHash){
-  clearTick();stepper(null);applyTheme(null);if(keepHash!==true)setHash("");
+  clearTick();hideTimerBar();stepper(null);applyTheme(null);if(keepHash!==true)setHash("");
   const hashCode=keepHash===true?INIT_HASH:"";
   const nick=store.get("np0-nick")||"";
   const ok=NET.status==="ready";
@@ -746,7 +801,7 @@ function setHash(h){try{if(h)history.replaceState(null,"","#"+h);else if(locatio
 const L={step:1,players:[],mode:"A",think:120,turn:0,picks:{},scenario:"tropical",active:"tropical"};
 const LSTEPS=["Welcome","Setup","Scenario","Think","Share","Patterns"];
 function lgo(n){L.step=n;localRender();window.scrollTo({top:0,behavior:"smooth"})}
-function localRender(){clearTick();stepper(LSTEPS,L.step);applyTheme(L.step>=2?L.active:null);[home,lSetup,lScenario,lThink,lShare,lResults][L.step]()}
+function localRender(){clearTick();hideTimerBar();stepper(LSTEPS,L.step);applyTheme(L.step>=2?L.active:null);[home,lSetup,lScenario,lThink,lShare,lResults][L.step]()}
 function lSetup(){
   app.innerHTML=`<div class="panel">
     <h2 style="margin-top:0">Who's on the plane? ✈️</h2>
@@ -812,12 +867,12 @@ function lThink(){
     <div class="row" style="justify-content:center;margin-top:10px">
       <button class="btn sec sm" id="hintb">New hint</button><button class="btn sec sm" id="pauseb">Pause</button><button class="btn" id="doneb">Everyone's ready →</button>
     </div></div>`;
-  drawTimer(left,L.think);
-  tick=setInterval(()=>{if(paused)return;left--;drawTimer(left,L.think);if(left%25===0&&left>0)$("#hint").textContent="💡 "+pick(HINTS);
-    if(left>0&&left<=10)play("tick");
-    if(left<=0){clearTick();play("gong");$("#hint").textContent="⏰ Time's up! Lock in your three.";}},1000);
+  const sc=scOf(L.active);showTimerBar(`${sc.em} ${sc.name}`);
+  drawTimer(left,L.think);timerTick(left,L.think);
+  tick=setInterval(()=>{if(paused)return;left--;drawTimer(left,L.think);timerTick(left,L.think);if(left%25===0&&left>0)$("#hint").textContent="💡 "+pick(HINTS);
+    if(left<=0){clearTick();$("#hint").textContent="⏰ Time's up! Lock in your three.";}},1000);
   $("#hintb").onclick=()=>$("#hint").textContent="💡 "+pick(HINTS);
-  $("#pauseb").onclick=e=>{paused=!paused;e.target.textContent=paused?"Resume":"Pause"};
+  $("#pauseb").onclick=e=>{paused=!paused;e.target.textContent=paused?"Resume":"Pause";timerPaused(paused)};
   $("#doneb").onclick=()=>lgo(4);
 }
 function lShare(){
@@ -983,7 +1038,7 @@ function checkTwist(){
   if(ts>O.lastTwist){O.lastTwist=ts;showOverlay(twistHTML(TWISTS[O.game.twist.i]||TWISTS[0]))}
 }
 function leaveOnline(keepHash){
-  clearTick();clearTimeout(O.loadTimer);clearTimeout(O.retry);
+  clearTick();hideTimerBar();clearTimeout(O.loadTimer);clearTimeout(O.retry);
   try{if(O.peer)O.peer.destroy()}catch(e){}
   O.peer=null;O.conn=null;O.conns={};O.code=null;O.role=null;O.game=null;O.players=[];HS=null;setNet("");
   if(!keepHash)setHash("");
@@ -994,7 +1049,7 @@ function renderOnline(){
   stepper(OSTEPS,PHASES.indexOf(g.phase));
   applyTheme(g.phase==="lobby"?null:(g.active||"tropical"));
   const key=[g.phase,g.round,g.turn,g.q,(g.order||[]).join(","),isHost(),!!me,me&&inRound(me)&&me.locked,g.mode,g.think,g.scenario,g.active,g.thinkEnd,g.phase==="results"?lockedPlayers().map(p=>p.id+JSON.stringify(p.picks)).join("|"):"",g.phase==="share"?JSON.stringify((O.players.find(p=>p.id===(g.order||[])[g.turn])||{}).picks||[]):""].join("~");
-  if(key!==O.viewKey){O.viewKey=key;clearTick();({lobby:oLobby,scenario:oScenario,think:oThink,share:oShare,results:oResults})[g.phase]()}
+  if(key!==O.viewKey){O.viewKey=key;clearTick();hideTimerBar();({lobby:oLobby,scenario:oScenario,think:oThink,share:oShare,results:oResults})[g.phase]()}
   refreshLive();
 }
 function playersHTML(){
@@ -1061,7 +1116,6 @@ function oThink(){
   app.innerHTML=`<div class="panel">
     <div class="row" style="justify-content:space-between;align-items:flex-start;flex-wrap:nowrap">
       <div><h2 style="margin:0">Pick your 3 items 🤫</h2><p class="muted" style="margin:4px 0 0">${scOf(g.active).em} ${esc(scOf(g.active).name)} · ${esc(scOf(g.active).dur)}. Choose on your own device — nobody sees your picks until the share round.</p></div>
-      <div style="width:160px;height:160px;transform:scale(.72);transform-origin:top right">${timerHTML()}</div>
     </div>
     <div class="hint" id="hint">💡 ${pick(HINTS)}</div>
     ${!me?joinBox():locked?`<div class="locked">🔒 Locked in! ${O.draft.map(i=>`${esc(i.e)} ${esc(i.n)}`).join(" · ")}<div style="margin-top:10px"><button class="btn sec sm" id="unlock">✏️ Change my picks</button></div></div>`
@@ -1071,9 +1125,8 @@ function oThink(){
   </div>`;
   bindJoinBox();
   const total=g.think;
-  let lastSec=null;
-  const upd=()=>{const left=(g.thinkEnd-Date.now())/1000;drawTimer(left,total);const sec=Math.ceil(left);
-    if(lastSec!==null&&sec!==lastSec){if(sec>0&&sec<=10)play("tick");if(sec<=0&&lastSec>0)play("gong")}lastSec=sec;
+  const sc=scOf(g.active);showTimerBar(`${sc.em} ${sc.name}`);
+  const upd=()=>{const left=(g.thinkEnd-Date.now())/1000;timerTick(left,total);
     if(left<=0&&$("#hint")&&!O.tu){O.tu=1;$("#hint").textContent="⏰ Time's up! Lock in your three."}};
   O.tu=0;upd();let n=0;tick=setInterval(()=>{upd();if(++n%25===0&&!O.tu)$("#hint").textContent="💡 "+pick(HINTS)},1000);
   if(me&&!locked){
